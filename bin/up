@@ -1,0 +1,50 @@
+#!/usr/bin/env bash
+
+PROJECT_BASE_FOLDER=$(realpath "$(dirname $0)/..")
+PREFIX='taturana-v2'
+echo "Base folder: $PROJECT_BASE_FOLDER"
+
+up='docker run -itd --restart always'
+
+# Code
+$up --name ${PREFIX}-code \
+    --entry-point /bin/bash \
+    --volume $PROJECT_BASE_FOLDER:/opt/taturana-v2 \
+    ubuntu:18.04 \
+    -c 'sleep infinity' 2> /dev/null
+
+
+$up --name ${PREFIX}-shell-history \
+    --entrypoint /bin/bash \
+    --volume /home/dev/.bhist \
+    ubuntu:18.04 \
+    -c 'chown 1000:1000 /home/dev/.bhist && sleep infinity'
+
+
+$up --name ${PREFIX}-db-data \
+  --entrypoint /bin/bash \
+  --volume /var/lib/postgresql/data \
+  ubuntu:18.04 \
+  -c 'sleep infinity'
+
+
+$up --name ${PREFIX}-db \
+  --volumes-from ${PREFIX}-db-data \
+  --env DBNAME=taturana-dev \
+  --env DBUSER=taturana \
+  --env DBPASS=taturana \
+  postgres:10
+
+$up --name ${PREFIX}-app \
+  --volume $PROJECT_BASE_FOLDER:/opt/taturana-v2 \
+  --entrypoint /bin/bash \
+  ubuntu:18.04 
+  #-c 'cd /opt/taturana-v2 && python manage.py runserver'
+
+# TODO: build a proper image
+docker exec -ti ${PREFIX}-app bash -c 'apt-get update \
+  && apt-get install -y python3-pip python3-dev \
+  && cd /usr/local/bin \
+  && ln -s /usr/bin/python3 python \
+  && pip3 install --upgrade pip'
+docker exec -ti ${PREFIX}-app bash -c 'cd /opt/taturana-v2 && pip install -r requirements/base.txt'

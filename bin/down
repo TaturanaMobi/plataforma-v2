@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+PREFIX='taturana-v2'
+
+down='docker rm -f'
+$down ${PREFIX}-code
+$down ${PREFIX}-shell-history
+$down ${PREFIX}-db-data
+$down ${PREFIX}-db
+$down ${PREFIX}-app

@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+docker exec -ti taturana-v2-app bash -c 'cd /opt/taturana-v2/taturana && python manage.py shell'
