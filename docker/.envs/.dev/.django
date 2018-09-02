@@ -1,0 +1,21 @@
+# General
+# ------------------------------------------------------------------------------
+USE_DOCKER=yes
+
+DJANGO_SETTINGS_MODULE=taturana.settings.dev
+SECRET_KEY='c@kr8(@^q238pe=17y9piux#yk2^h!-dzz1#gg*pzgk!e_7rux'
+DEBUG=True
+CELERY_APP=taturana.celery.app
+CELERY_BROKER_URL=amqp://admin:admin@rabbit:5672
+
+# Redis
+# ------------------------------------------------------------------------------
+REDIS_URL=redis://redis:6379
+
+# Celery
+# ------------------------------------------------------------------------------
+
+# Flower
+CELERY_FLOWER_USER=admin
+CELERY_FLOWER_PASSWORD=admin
+
