@@ -15,8 +15,7 @@ RUN apk update \
   # https://docs.djangoproject.com/en/dev/ref/django-admin/#dbshell
   && apk add postgresql-client \
   # utils, like vim
-  && apk add vim
-
+ && apk add vim ansible bash 
 
 # Requirements are installed here to ensure they will be cached.
 COPY ./requirements /requirements
@@ -41,6 +40,14 @@ RUN chmod +x /start-celerybeat
 COPY ./dev/django/celery/flower/start /start-flower
 #RUN sed -i 's/\r//' /start-flower
 RUN chmod +x /start-flower
+
+#COPY ./taturana_key.pub /app/
+#RUN echo $SECRETS_GIST
+#RUN wget -O /app/.secrets ${SECRETS_GIST}
+#RUN cat /app/.secrets
+#RUN ansible-vault --vault-password-file /app/taturana_key.pub decrypt /app/.secrets
+#RUN source /app/.secrets
+#RUN echo ${SECRET_KEY}
 
 WORKDIR /app
 
