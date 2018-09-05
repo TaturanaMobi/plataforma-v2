@@ -1,0 +1,90 @@
+[
+{
+  "model": "messagery.email",
+  "pk": 1,
+  "fields": {
+    "created": "2018-08-26T20:00:00Z",
+    "modified": "2018-08-26T20:00:00Z",
+    "name": "confirm_scheduling_3_hours",
+    "default_title": "Voc\u00ea tem uma sess\u00e3o agendada!",
+    "default_template": "{% extends \"base_template.html\" %}\r\n{% block text %}\r\n<p>Oi, {{ambassador.profile.name}}, tudo bem?</p>\r\n<p>Obrigada pelo seu interesse em integrar a rede de exibidores da Taturana (<a href=\"https://www.facebook.com/taturanamobi\">www.facebook.com/taturanamobi</a>)! A sess\u00e3o do filme {{movie.title}} foi agendada para o dia {{screening.date.strftime(\"%d/%m/%Y\")}}, portanto, n\u00e3o temos muito tempo at\u00e9 l\u00e1. A sess\u00e3o vai acontecer mesmo nessa data? Caso n\u00e3o, voc\u00ea pode edit\u00e1-la na sua pr\u00f3pria p\u00e1gina na plataforma:<br><a href=\"{{absoluteurl}}ambassador\">{{absoluteurl|replace('http://', '')}}ambassador</a>\r\n<p>Se \u00e9 isso mesmo, vamos nessa! Na pr\u00f3pria plataforma, voc\u00ea pode editar a data e hor\u00e1rio de sua sess\u00e3o e ainda baixar todo o material de divulga\u00e7\u00e3o do filme: release, cartaz e fotos. Esses materiais podem ser usados para criar convites e outras pe\u00e7as de divulga\u00e7\u00e3o.</p>\r\n<p>O link do filme ser\u00e1 enviado em breve. Ent\u00e3o, fica de olho na sua caixa de e-mail nos pr\u00f3ximos dias.</p>\r\n<p>Refor\u00e7amos a import\u00e2ncia de voc\u00eas enviarem logo ap\u00f3s a exibi\u00e7\u00e3o o n\u00famero de pessoas que assistiu ao filme, um breve relato da atividade e algumas fotos. Essas informa\u00e7\u00f5es s\u00e3o muito importantes para construir a rede de impacto social do filme e inspirar outras sess\u00f5es.</p>\r\n<p>Abra\u00e7os,</p>\r\n<p>Equipe Taturana.</p>\r\n{% endblock %}"
+  }
+},
+{
+  "model": "messagery.email",
+  "pk": 2,
+  "fields": {
+    "created": "2018-08-26T20:00:00Z",
+    "modified": "2018-08-26T20:00:00Z",
+    "name": "confirm_scheduling_9_hours",
+    "default_title": "Voc\u00ea tem uma sess\u00e3o agendada!",
+    "default_template": "{% extends \"base_template.html\" %}\r\n{% block text %}\r\n<p>Oi, {{ambassador.profile.name}}, tudo bem?</p>\r\n<p>Obrigada pelo seu interesse em integrar a rede de exibidores da Taturana (<a href=\"https://www.facebook.com/taturanamobi\">www.facebook.com/taturanamobi</a>)! A sess\u00e3o do filme {{movie.title}} foi agendada para o dia {{screening.date.strftime(\"%d/%m/%Y\")}}, portanto, n\u00e3o temos muito tempo at\u00e9 l\u00e1. A sess\u00e3o vai acontecer mesmo nessa data? Caso n\u00e3o, voc\u00ea pode edit\u00e1-la na sua pr\u00f3pria p\u00e1gina na plataforma:<br><a href=\"{{absoluteurl}}ambassador\">{{absoluteurl|replace('http://', '')}}ambassador</a><p>\r\n<p>Se \u00e9 isso mesmo, vamos nessa! Na pr\u00f3pria plataforma, voc\u00ea pode editar a data e hor\u00e1rio de sua sess\u00e3o e ainda baixar todo o material de divulga\u00e7\u00e3o do filme: release, cartaz e fotos. Esses materiais podem ser usados para criar convites e outras pe\u00e7as de divulga\u00e7\u00e3o.</p>\r\n<p>O filme ser\u00e1 enviado em at\u00e9 dois dias por meio de um link para download. Ent\u00e3o, fica de olho na sua caixa de e-mail nos pr\u00f3ximos dias.</p>\r\n<p>Refor\u00e7amos a import\u00e2ncia de voc\u00eas enviarem logo ap\u00f3s a exibi\u00e7\u00e3o o n\u00famero de pessoas que assistiu ao filme, um breve relato da atividade e algumas fotos. Essas informa\u00e7\u00f5es s\u00e3o muito importantes para construir a rede de impacto social do filme e inspirar outras sess\u00f5es.</p>\r\n<p>Abra\u00e7os,</p>\r\n<p>Equipe Taturana.</p>\r\n{% endblock %}"
+  }
+},
+{
+  "model": "messagery.email",
+  "pk": 3,
+  "fields": {
+    "created": "2018-08-26T20:00:00Z",
+    "modified": "2018-08-26T20:00:00Z",
+    "name": "confirm_scheduling_10_hours",
+    "default_title": "Voc\u00ea tem uma sess\u00e3o agendada!",
+    "default_template": "{% extends \"base_template.html\" %}\r\n{% block text %}\r\n<p>Oi, {{ambassador.profile.name}}, tudo bem?</p>\r\n<p>Obrigada pelo seu interesse em integrar a rede de exibidores da Taturana (<a href=\"https://www.facebook.com/taturanamobi\">www.facebook.com/taturanamobi</a>)! A sess\u00e3o do filme {{movie.title}} foi agendada e iremos divulg\u00e1-la nas redes sociais.<p>\r\n<p>Na pr\u00f3pria plataforma, voc\u00ea pode editar a data e hor\u00e1rio de sua sess\u00e3o e ainda baixar todo o material de divulga\u00e7\u00e3o do filme: release, cartaz e fotos. Esses materiais podem ser usados para criar convites e outras pe\u00e7as de divulga\u00e7\u00e3o.</p>\r\n<p>O filme ser\u00e1 enviado 7 dias antes da sess\u00e3o por meio de um link para download, ent\u00e3o pe\u00e7o que voc\u00ea sempre atualize a data da sess\u00e3o no sistema.</p>\r\n<p>Refor\u00e7amos a import\u00e2ncia de voc\u00eas enviarem logo ap\u00f3s a exibi\u00e7\u00e3o o n\u00famero de pessoas que assistiu ao filme, um breve relato da atividade e algumas fotos. Essas informa\u00e7\u00f5es s\u00e3o muito importantes para construir a rede de impacto social do filme e inspirar outras sess\u00f5es.<p>\r\n<p>Abra\u00e7os,</p>\r\n<p>Equipe Taturana.</p>\r\n{% endblock %}"
+  }
+},
+{
+  "model": "messagery.email",
+  "pk": 4,
+  "fields": {
+    "created": "2018-08-26T20:00:00Z",
+    "modified": "2018-08-26T20:00:00Z",
+    "name": "confirm_screening_date",
+    "default_title": "Tudo certo para a sua sess\u00e3o?",
+    "default_template": "{% extends \"base_template.html\" %}\r\n{% block text %}\r\n<p>Oi, {{ambassador.profile.name}},</p>\r\n<p>Como est\u00e3o os preparativos para a sua sess\u00e3o do {{movie.title}} no dia {{screening.date.strftime(\"%d/%m/%Y\")}}? Ela est\u00e1 de fato confirmada?</p>\r\n<p>Por favor, confira se todas as informa\u00e7\u00f5es est\u00e3o corretas. Se houver qualquer altera\u00e7\u00e3o, voc\u00ea pode edit\u00e1-la na sua pr\u00f3pria p\u00e1gina na plataforma: <a href=\"{{absoluteurl}}ambassador\">{{absoluteurl|replace('http://', '')}}ambassador</a></p>\r\n<p>Abra\u00e7os,</p>\r\n<p>Equipe Taturana</p>\r\n{% endblock %}"
+  }
+},
+{
+  "model": "messagery.email",
+  "pk": 5,
+  "fields": {
+    "created": "2018-08-26T20:00:00Z",
+    "modified": "2018-08-26T20:00:00Z",
+    "name": "send_the_movie_3_days",
+    "default_title": "Download do filme {movie[title]}.",
+    "default_template": "{% extends \"base_template.html\" %}\r\n{% block text %}\r\n<p>Oi, {{ambassador.profile.name}}, tudo bem?</p>\r\n<p>Obrigada pelo retorno com a confirma\u00e7\u00e3o.</p>\r\n<p>Voc\u00ea pode ter acesso ao filme por esse link para download:<br>\r\n<a href=\"{{movie.link_for_download}}\">{{movie.link_for_download}}</a>\r\n{% if movie.password_for_download %}<br>senha: {{movie.password_for_download}}{% endif %}</p>\r\n<p>Reitero cuidado com o material, que n\u00e3o deve ser cedido a terceiros, nem usado para outras exibi\u00e7\u00f5es sem nossa pr\u00e9via autoriza\u00e7\u00e3o.<p>\r\n<p>Por favor, qualquer problema entre em contato pelo e-mail: <a href=\"mailto: contato@taturanamobi.com.br\">contato@taturanamobi.com.br</a>.</p>\r\n<p>Aguardo o relat\u00f3rio e boa sess\u00e3o!</p>\r\n<p>Abra\u00e7os</p>\r\n<p>Equipe Taturana</p>\r\n{% endblock %}"
+  }
+},
+{
+  "model": "messagery.email",
+  "pk": 6,
+  "fields": {
+    "created": "2018-08-26T20:00:00Z",
+    "modified": "2018-08-26T20:00:00Z",
+    "name": "send_the_movie_9_days",
+    "default_title": "Download do filme {movie[title]}.",
+    "default_template": "{% extends \"base_template.html\" %}\r\n{% block text %}\r\n<p>Oi, {{ambassador.profile.name}}, tudo bem?</p>\r\n<p>Obrigada pelo retorno com a confirma\u00e7\u00e3o.</p>\r\n<p>Voc\u00ea pode ter acesso ao filme por esse link para download:<br>\r\n<a href=\"{{movie.link_for_download}}\">{{movie.link_for_download}}</a>\r\n{% if movie.password_for_download %}<br>senha: {{movie.password_for_download}}{% endif %}</p>\r\n<p>Reitero cuidado com o material, que n\u00e3o deve ser cedido a terceiros, nem usado para outras exibi\u00e7\u00f5es sem nossa pr\u00e9via autoriza\u00e7\u00e3o.<p>\r\n<p>Por favor, qualquer problema entre em contato pelo e-mail: <a href=\"mailto: contato@taturanamobi.com.br\">contato@taturanamobi.com.br</a>.</p>\r\n<p>Aguardo o relat\u00f3rio e boa sess\u00e3o!</p>\r\n<p>Abra\u00e7os</p>\r\n<p>Equipe Taturana</p>\r\n{% endblock %}"
+  }
+},
+{
+  "model": "messagery.email",
+  "pk": 7,
+  "fields": {
+    "created": "2018-08-26T20:00:00Z",
+    "modified": "2018-08-26T20:00:00Z",
+    "name": "send_the_movie_10_days",
+    "default_title": "Download do filme {movie[title]}.",
+    "default_template": "{% extends \"base_template.html\" %}\r\n{% block text %}\r\n<p>Oi, {{ambassador.profile.name}}, tudo bem?</p>\r\n<p>Obrigada pelo retorno com a confirma\u00e7\u00e3o.</p>\r\n<p>Voc\u00ea pode ter acesso ao filme por esse link para download:<br>\r\n<a href=\"{{movie.link_for_download}}\">{{movie.link_for_download}}</a>\r\n{% if movie.password_for_download %}<br>senha: {{movie.password_for_download}}{% endif %}</p>\r\n<p>Reitero cuidado com o material, que n\u00e3o deve ser cedido a terceiros, nem usado para outras exibi\u00e7\u00f5es sem nossa pr\u00e9via autoriza\u00e7\u00e3o.<p>\r\n<p>Por favor, qualquer problema entre em contato pelo e-mail: <a href=\"mailto: contato@taturanamobi.com.br\">contato@taturanamobi.com.br</a>.</p>\r\n<p>Aguardo o relat\u00f3rio e boa sess\u00e3o!</p>\r\n<p>Abra\u00e7os</p>\r\n<p>Equipe Taturana</p>\r\n{% endblock %}"
+  }
+},
+{
+  "model": "messagery.email",
+  "pk": 8,
+  "fields": {
+    "created": "2018-08-26T20:00:00Z",
+    "modified": "2018-08-26T20:00:00Z",
+    "name": "tell_ambassador_the_results",
+    "default_title": "Veja sua contribui\u00e7\u00e3o para a rede de impacto do {movie[title]}.",
+    "default_template": "{% extends \"base_template.html\" %}\r\n{% block text %}\r\n<p>{{ambassador.profile.name}}, agradecemos a sua parceria na difus\u00e3o social do {{movie.title}}.</p>\r\n<p>Veja os n\u00fameros e resultados da rede de impacto do filme: <a href=\"{{absoluteurl}}film/{{movie.slug}}\">{{absoluteurl}}film/{{movie.slug}}</a></p>\r\n<p>Na nossa plataforma ({{absoluteurl}}/films) voc\u00ea pode agendar sess\u00f5es de outros filmes. Esperamos novas parcerias no futuro!</p>\r\n<p>Obrigada.</p>\r\n<p>Equipe Taturana</p>\r\n{% endblock %}"
+  }
+}
+]
