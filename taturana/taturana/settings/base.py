@@ -16,6 +16,8 @@ env = environ.Env(
     DEBUG=(bool, False)
 )
 
+from django.utils.translation import gettext_lazy as _
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 SITE_ROOT = root()
 BASE_DIR = root()
@@ -46,8 +48,9 @@ INSTALLED_APPS = [
     # Third party
     'django_extensions',
 
-    # taturana
-    'movies'
+    # taturana apps
+    'movies',
+    'messagery'
 ]
 
 MIDDLEWARE = [
@@ -92,8 +95,17 @@ DATABASES = {
         'PASSWORD': env('POSTGRES_PASSWORD'),
         'HOST': env('POSTGRES_HOST'),
         'PORT': env('POSTGRES_PORT')
+    },
+    'mongo': {
+        'ENGINE': 'djongo',
+        'NAME': 'taturana',
+        'HOST': '192.168.2.12',
+        'PORT': 27018,
+        'ENFORCE_SCHEMA': False
     }
 }
+
+DATABASE_ROUTERS = ['taturana.routers.MongoRORouter']
 
 CACHES = {
     'default': {
@@ -137,9 +149,11 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.1/topics/i18n/
-
-LANGUAGE_CODE = 'pt-br'
-
+LOCALE_PATHS = [root.path('locale')]
+LANGUAGE_CODE = 'pt_BR'
+LANGUAGES = [
+    ('pt_BR', _('Brazilian Portuguese'))
+]
 TIME_ZONE = 'America/Sao_Paulo'
 
 USE_I18N = True
@@ -154,6 +168,6 @@ USE_TZ = True
 public_root = root.path('public/')
 
 MEDIA_ROOT = public_root('media')
-MEDIA_URL = 'media/'
+MEDIA_URL = '/media/'
 STATIC_ROOT = public_root('static')
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
