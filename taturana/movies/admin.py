@@ -1,9 +1,9 @@
 from django.contrib import admin
 
 # Register your models here.
-from .models import Film
+from .models import MongoFilm
 
 class FilmAdmin(admin.ModelAdmin):
     list_display = ('_id', 'title', 'status')
 
-admin.site.register(Film, FilmAdmin)
+admin.site.register(MongoFilm, FilmAdmin)

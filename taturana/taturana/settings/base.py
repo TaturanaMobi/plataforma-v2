@@ -33,26 +33,30 @@ DEBUG = env('DEBUG')
 
 ALLOWED_HOSTS = []
 
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': (
+       'rest_framework.permissions.AllowAny',
+    )
+}
 
 # Application definition
-
 INSTALLED_APPS = [
     # Django
-    'django.contrib.admin',
-    'django.contrib.auth',
     'django.contrib.contenttypes',
+    'django.contrib.auth',
+    'django.contrib.admin',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
     # Third party
     'django_extensions',
+    'rest_framework',
 
     # taturana apps
     'movies',
     'messagery'
 ]
-
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -64,6 +68,8 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'taturana.urls'
+
+AUTH_USER_MODEL = 'auth.User'
 
 TEMPLATES = [
     {
@@ -100,7 +106,7 @@ DATABASES = {
         'ENGINE': 'djongo',
         'NAME': 'taturana',
         'HOST': '192.168.2.12',
-        'PORT': 27018,
+        'PORT': 27017,
         'ENFORCE_SCHEMA': False
     }
 }
