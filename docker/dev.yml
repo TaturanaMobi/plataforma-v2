@@ -16,7 +16,6 @@ services:
     volumes:
       - ../taturana:/app
     env_file:
-      - ./.envs/.dev/.build
       - ./.envs/.dev/.django
       - ./.envs/.dev/.postgres
     ports:
