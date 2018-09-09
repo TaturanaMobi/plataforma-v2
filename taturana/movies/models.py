@@ -1,3 +1,6 @@
+from datetime import datetime
+
+from django.utils.timezone import make_aware
 from djongo import models as djongo_models
 from django.db import models
 
@@ -6,7 +9,7 @@ class MongoScreening(djongo_models.Model):
     date = djongo_models.DateTimeField()
     team_member = djongo_models.BooleanField()
     activity = djongo_models.CharField(max_length=250)
-    activity_theme = djongo_models.CharField(max_length=250)
+    activity_theme = djongo_models.TextField()
     quorum_expectation = djongo_models.CharField(max_length=250)
     comments = djongo_models.CharField(max_length=250)
     accept_terms = djongo_models.BooleanField()
@@ -22,8 +25,8 @@ class MongoScreening(djongo_models.Model):
     s_country = djongo_models.CharField(max_length=250)
     created_at = djongo_models.DateTimeField()
     user_id = djongo_models.CharField(max_length=250)
-    draft = djongo_models.CharField(max_length=5)
-    real_quorum = djongo_models.CharField(max_length=10)
+    draft = djongo_models.CharField(max_length=15)
+    real_quorum = djongo_models.CharField(max_length=250)
     report_description = djongo_models.TextField()
     report_image_1 = djongo_models.CharField(max_length=250)
     report_image_2 = djongo_models.CharField(max_length=250)
@@ -55,7 +58,7 @@ class MongoFilm(djongo_models.Model):
     age_rating = djongo_models.CharField(max_length=250)
     production_company = djongo_models.CharField(max_length=250)
     director = djongo_models.CharField(max_length=250)
-    technical_information = djongo_models.CharField(max_length=250)
+    technical_information = djongo_models.TextField()
     site = djongo_models.CharField(max_length=250)
     facebook = djongo_models.CharField(max_length=250)
     twitter = djongo_models.CharField(max_length=250)
@@ -65,9 +68,9 @@ class MongoFilm(djongo_models.Model):
     slug = djongo_models.CharField(max_length=250)
     poster_thumb_path = djongo_models.CharField(max_length=250)
     press_kit_path = djongo_models.CharField(max_length=250)
-    # screening = djongo_models.ArrayModelField(
-    #     model_container=MongoScreening
-    # )
+    screening = djongo_models.ArrayModelField(
+        model_container=MongoScreening
+    )
     class Meta:
         managed = False
         db_table = 'films'
@@ -91,7 +94,7 @@ class Film(models.Model):
     age_rating = models.CharField(max_length=250, null=True, blank=True)
     production_company = models.CharField(max_length=250, null=True, blank=True)
     director = models.CharField(max_length=250, null=True, blank=True)
-    technical_information = models.CharField(max_length=250, null=True, blank=True)
+    technical_information = models.TextField(null=True, blank=True)
     site = models.CharField(max_length=250, null=True, blank=True)
     facebook = models.CharField(max_length=250, null=True, blank=True)
     twitter = models.CharField(max_length=250, null=True, blank=True)
@@ -123,37 +126,64 @@ class Film(models.Model):
         else:
             print("Film {._id} created.".format(film))
 
+        screenings_status = {'updated': 0, 'created': 0}
+        for mongo_src in mongo_film.screening or []:
+            try:
+                scr = Screening.objects.get(_id=mongo_src._id)
+                screenings_status['updated'] += 1
+            except Screening.DoesNotExist:
+                scr = Screening(_id=mongo_src._id, film=film)
+                screenings_status['created'] += 1
 
+            try:
+                for field in Screening._meta.fields:
+                    if field.name == 'film':
+                        continue
+                    value = getattr(mongo_src, field.name)
+                    if isinstance(field, models.BooleanField):
+                        value = value or False
+                    if isinstance(value, datetime):
+                        value = make_aware(value)
+                    field.validate(value, scr)
+                    setattr(scr, field.name, value)
+
+                scr.full_clean()
+            except Exception as exc:
+                print("Error on screening {} movie {}: {} {}".format(mongo_src._id, film._id, field.name, exc))
+                print(vars(exc))
+            else:
+                scr.save()
+        print(screenings_status)
 
 class Screening(models.Model):
     _id = models.CharField(max_length=24, primary_key=True)
     date = models.DateTimeField()
-    team_member = models.BooleanField()
-    activity = models.CharField(max_length=250)
-    activity_theme = models.CharField(max_length=250)
-    quorum_expectation = models.CharField(max_length=250)
-    comments = models.CharField(max_length=250)
+    team_member = models.BooleanField(default=True)
+    activity = models.CharField(max_length=250, null=True, blank=True)
+    activity_theme = models.TextField(null=True, blank=True)
+    quorum_expectation = models.CharField(max_length=250, null=True, blank=True)
+    comments = models.TextField(max_length=250, null=True, blank=True)
     accept_terms = models.BooleanField()
-    place_name = models.CharField(max_length=250)
-    cep = models.CharField(max_length=250)
-    street = models.CharField(max_length=250)
-    number = models.CharField(max_length=250)
-    complement = models.CharField(max_length=250)
-    zone = models.CharField(max_length=250)
-    city = models.CharField(max_length=250)
-    public_event = models.BooleanField()
-    uf = models.CharField(max_length=250)
-    s_country = models.CharField(max_length=250)
-    created_at = models.DateTimeField()
-    user_id = models.CharField(max_length=250)
-    draft = models.CharField(max_length=5)
-    real_quorum = models.CharField(max_length=10)
-    report_description = models.TextField()
-    report_image_1 = models.CharField(max_length=250)
-    report_image_2 = models.CharField(max_length=250)
-    report_image_3 = models.CharField(max_length=250)
-    author_1 = models.CharField(max_length=250)
-    author_2 = models.CharField(max_length=250)
-    author_3 = models.CharField(max_length=250)
-    updated_at = models.DateTimeField()
+    place_name = models.CharField(max_length=250, null=True, blank=True)
+    cep = models.CharField(max_length=250, null=True, blank=True)
+    street = models.CharField(max_length=250, null=True, blank=True)
+    number = models.CharField(max_length=250, null=True, blank=True)
+    complement = models.CharField(max_length=250, null=True, blank=True)
+    zone = models.CharField(max_length=250, null=True, blank=True)
+    city = models.CharField(max_length=250, null=True, blank=True)
+    public_event = models.BooleanField(default=True)
+    uf = models.CharField(max_length=250, null=True, blank=True)
+    s_country = models.CharField(max_length=250, null=True, blank=True)
+    created_at = models.DateTimeField(null=True, blank=True)
+    user_id = models.CharField(max_length=250, null=True, blank=True)
+    draft = models.CharField(max_length=15, null=True, blank=True)
+    real_quorum = models.CharField(max_length=250, null=True, blank=True)
+    report_description = models.TextField(null=True, blank=True)
+    report_image_1 = models.CharField(max_length=250, null=True, blank=True)
+    report_image_2 = models.CharField(max_length=250, null=True, blank=True)
+    report_image_3 = models.CharField(max_length=250, null=True, blank=True)
+    author_1 = models.CharField(max_length=250, null=True, blank=True)
+    author_2 = models.CharField(max_length=250, null=True, blank=True)
+    author_3 = models.CharField(max_length=250, null=True, blank=True)
+    updated_at = models.DateTimeField(null=True, blank=True)
     film = models.ForeignKey(Film, on_delete=models.CASCADE, related_name='screenings')
