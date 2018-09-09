@@ -31,6 +31,7 @@ services:
       - local_postgres_data:/var/lib/postgresql/data
     env_file:
       - ./.envs/.dev/.postgres
+    restart: always
 
   mailhog:
     image: mailhog/mailhog:v1.0.0
@@ -47,7 +48,7 @@ services:
       - RABBITMQ_DEFAULT_USER=admin
       - RABBITMQ_DEFAULT_PASS=admin
     ports:
-      - "8080:15672"
+      - "15672:15672"
 
   celeryworker:
     <<: *django
@@ -79,3 +80,24 @@ services:
     ports:
       - 5555:5555
     command: /start-flower
+
+#  memcached:
+#    image: memcached:latest
+
+#  sentry:
+#    image: sentry:latest
+#    depends_on:
+#      - postgres
+#      - redis
+#      - memcached
+#    links:
+#      - postgres
+#      - redis
+#      - memcached
+#    env_file:
+#      - ./.envs/.dev/.sentry
+#    ports:
+#      - "9090:8080"
+#    command:
+#      - sentry upgrade
+
