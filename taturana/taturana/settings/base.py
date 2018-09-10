@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'rest_framework',
 
     # taturana apps
+    'mongo_sync',
     'movies',
     'messagery'
 ]

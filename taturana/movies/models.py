@@ -105,6 +105,9 @@ class Film(models.Model):
     poster_thumb_path = models.CharField(max_length=250, null=True, blank=True)
     press_kit_path = models.CharField(max_length=250, null=True, blank=True)
 
+    def __str__(self):
+        return self.title or self.slug or self._id
+
     @classmethod
     def sync_from_mongo(cls, hash):
         mongo_film = MongoFilm.objects.get(_id=hash)
