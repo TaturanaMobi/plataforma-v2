@@ -4,6 +4,7 @@ from django.utils.timezone import make_aware
 from djongo import models as djongo_models
 from django.db import models
 
+
 class MongoScreening(djongo_models.Model):
     _id = djongo_models.CharField(max_length=24, primary_key=True)
     date = djongo_models.DateTimeField()
@@ -156,7 +157,9 @@ class Film(models.Model):
                 print(vars(exc))
             else:
                 scr.save()
-        print(screenings_status)
+
+        return screenings_status
+
 
 class Screening(models.Model):
     _id = models.CharField(max_length=24, primary_key=True)

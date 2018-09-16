@@ -1,8 +1,2 @@
 #!/usr/bin/env bash
-
-
-BIN_PATH=$(dirname $(realpath $0))
-DOCKER_DEV=$(realpath "${BIN_PATH}/../docker/dev.yml")
-
-docker-compose -f ${DOCKER_DEV} -p taturanav2 exec app python manage.py $@
-
+docker-compose -f /opt/taturana/ops/docker-compose.yml exec backend_web python manage.py $@

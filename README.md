@@ -26,7 +26,7 @@ docker-compose run backend_web python manage.py shell_plus
 e cole o seguinte código no shell do python
 
 ```
-from mongo_sync.tasks import sync_task
-[sync_task.delay('film', f._id) for f in MongoFilm.objects.all()]
+from mongo_sync.tasks import sync_all_movies
+sync_all_movies()
 ```
 

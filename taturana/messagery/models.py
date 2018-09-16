@@ -64,7 +64,7 @@ class Email(TimeStampedModel):
 class EmailTemplate(TimeStampedModel):
     # movie_id is the object_id in mongo
     film = models.ForeignKey('movies.Film', on_delete=models.CASCADE)
-    subject = models.CharField(max_length=100)
+    subject = models.CharField(max_length=100, blank=True)
     html = models.TextField(blank=True)
     text = models.TextField(blank=True)
     active = models.BooleanField(default=True)
