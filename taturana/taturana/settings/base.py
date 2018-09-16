@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     # Third party
     'django_extensions',
     'rest_framework',
+    'django_celery_results',
 
     # taturana apps
     'mongo_sync',
@@ -178,3 +179,15 @@ MEDIA_ROOT = public_root('media')
 MEDIA_URL = '/media/'
 STATIC_ROOT = public_root('static')
 STATIC_URL = '/static/'
+
+
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://redis:6379/1",
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient"
+        },
+        "KEY_PREFIX": "example"
+    }
+}

@@ -1,1 +1,2 @@
 -r base.txt
+Werkzeug>=0.14,<0.15

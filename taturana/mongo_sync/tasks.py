@@ -6,3 +6,4 @@ from django.apps import apps
 def sync_task(object, hash):
     model = apps.get_model(*ALLOWED_OBJECTS_MAP[object].split('.'))
     model.sync_from_mongo(hash)
+
