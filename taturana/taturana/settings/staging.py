@@ -6,4 +6,4 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 CELERY_RESULT_BACKEND = 'django-cache'
 
-ALLOWED_HOSTS = ['127.0.0.1', 'admin.taturana']
+ALLOWED_HOSTS = ['127.0.0.1', 'admin.taturana', 'admin-staging.taturanamobi.com.br']
