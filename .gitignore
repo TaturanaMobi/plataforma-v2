@@ -113,3 +113,4 @@ venv.bak/
 taturana/public/static
 taturana/public/media
 taturana/celerybeat.pid
+taturana/celerybeat.pid
