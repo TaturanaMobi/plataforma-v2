@@ -47,7 +47,6 @@ RUN chmod +x /start-flower
 COPY ./staging/uwsgi.ini /uwsgi.ini
 COPY ./staging/nginx.conf /etc/nginx/conf.d/default.conf
 RUN mkdir -pv /run/nginx/
-#RUN echo "daemon off;" >> /etc/nginx/nginx.conf
 
 RUN echo "/app" > /usr/local/lib/python3.6/site-packages/taturana.pth
 
