@@ -107,7 +107,7 @@ DATABASES = {
     'mongo': {
         'ENGINE': 'djongo',
         'NAME': 'taturana',
-        'HOST': '192.168.2.12',
+        'HOST': 'mongo',
         'PORT': 27017,
         'ENFORCE_SCHEMA': False
     }
