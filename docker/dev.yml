@@ -20,6 +20,7 @@ services:
       - ./.envs/.dev/.postgres
     ports:
       - "80:8000"
+    restart: always
     command: /start-django-app
 
   postgres:
@@ -31,14 +32,17 @@ services:
       - local_postgres_data:/var/lib/postgresql/data
     env_file:
       - ./.envs/.dev/.postgres
+    restart: always
 
   mailhog:
     image: mailhog/mailhog:v1.0.0
     ports:
+      - "1025:1025"
       - "8025:8025"
 
   redis:
     image: redis:latest # that's safe
+    restart: always
 
   rabbit:
     hostname: rabbit
@@ -47,7 +51,8 @@ services:
       - RABBITMQ_DEFAULT_USER=admin
       - RABBITMQ_DEFAULT_PASS=admin
     ports:
-      - "8080:15672"
+      - "15672:15672"
+    restart: always
 
   celeryworker:
     <<: *django

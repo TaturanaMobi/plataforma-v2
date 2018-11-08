@@ -16,6 +16,8 @@ env = environ.Env(
     DEBUG=(bool, False)
 )
 
+from django.utils.translation import gettext_lazy as _
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 SITE_ROOT = root()
 BASE_DIR = root()
@@ -31,25 +33,32 @@ DEBUG = env('DEBUG')
 
 ALLOWED_HOSTS = []
 
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': (
+       'rest_framework.permissions.AllowAny',
+    )
+}
 
 # Application definition
-
 INSTALLED_APPS = [
     # Django
-    'django.contrib.admin',
-    'django.contrib.auth',
     'django.contrib.contenttypes',
+    'django.contrib.auth',
+    'django.contrib.admin',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
     # Third party
     'django_extensions',
+    'rest_framework',
+    'django_celery_results',
 
-    # taturana
-    'movies'
+    # taturana apps
+    'mongo_sync',
+    'movies',
+    'messagery'
 ]
-
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -61,6 +70,8 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'taturana.urls'
+
+AUTH_USER_MODEL = 'auth.User'
 
 TEMPLATES = [
     {
@@ -92,8 +103,17 @@ DATABASES = {
         'PASSWORD': env('POSTGRES_PASSWORD'),
         'HOST': env('POSTGRES_HOST'),
         'PORT': env('POSTGRES_PORT')
+    },
+    'mongo': {
+        'ENGINE': 'djongo',
+        'NAME': 'taturana',
+        'HOST': 'mongo',
+        'PORT': 27017,
+        'ENFORCE_SCHEMA': False
     }
 }
+
+DATABASE_ROUTERS = ['taturana.routers.MongoRORouter']
 
 CACHES = {
     'default': {
@@ -137,9 +157,11 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.1/topics/i18n/
-
-LANGUAGE_CODE = 'pt-br'
-
+LOCALE_PATHS = [root.path('locale')]
+LANGUAGE_CODE = 'pt_BR'
+LANGUAGES = [
+    ('pt_BR', _('Brazilian Portuguese'))
+]
 TIME_ZONE = 'America/Sao_Paulo'
 
 USE_I18N = True
@@ -154,6 +176,18 @@ USE_TZ = True
 public_root = root.path('public/')
 
 MEDIA_ROOT = public_root('media')
-MEDIA_URL = 'media/'
+MEDIA_URL = '/media/'
 STATIC_ROOT = public_root('static')
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
+
+
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://redis:6379/1",
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient"
+        },
+        "KEY_PREFIX": "example"
+    }
+}

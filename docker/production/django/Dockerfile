@@ -47,6 +47,10 @@ COPY . /app
 
 RUN chown -R django /app
 
+USER postgres
+
+RUN psql -U postgres -tc "SELECT 1 FROM pg_database WHERE datname = '${POSTGRES_DB}';" | grep -q 1 || psql -U postgres -c "CREATE DATABASE ${POSTGRES_DB} WITH owner ${POSTGRES_USER} encoding UTF8;"
+
 USER django
 
 WORKDIR /app

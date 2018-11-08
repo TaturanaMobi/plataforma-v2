@@ -102,3 +102,16 @@ venv.bak/
 
 # mypy
 .mypy_cache/
+
+# vim
+.*.swp
+
+#pycharm
+.idea
+
+# django
+taturana/public/static
+taturana/public/media
+taturana/celerybeat.pid
+taturana/celerybeat.pid
+taturana/core
